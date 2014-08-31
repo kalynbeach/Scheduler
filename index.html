@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Scheduler</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+
+  <body>
+    <div class="container">
+
+      <!-- Header Section -->
+      <div class="row">
+        <div class="col-md-4" id="header-section">
+          <h1>Scheduler</h1>
+        </div>
+
+        <!-- Controls -->
+        <div class="col-md-8">
+          <button class="btn btn-default" id="new-shift-button">New Shift</button>
+          <button class="btn btn-default" id="edit-shift-button">Edit Shift</button>
+
+          <!-- New Shift Form -->
+          <form class="form-inline" role="form" id="new-task-form">
+            <!-- Week Select -->
+            <div class="form-group" id="week-select-form">
+              <label class="sr-only">Week Select</label>
+              <div class="btn-group" data-toggle="buttons" id="week">
+                <label class="btn btn-default">
+                  <input type="radio" name="options" id="this-week" value="This Week"> This Week
+                </label>
+                <label class="btn btn-default">
+                  <input type="radio" name="options" id="next-week" value="Next Week"> Next Week
+                </label>
+              </div>
+            </div>
+            <!-- Day Select -->
+            <div class="form-group" id="day-select-form">
+              <label for="day-select">Day: </label>
+              <select class="form-control" id="day-select">
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+                <option value="Saturday">Saturday</option>
+                <option value="Sunday">Sunday</option>
+              </select>
+            </div>
+            <!-- Time Select-->
+            <div class="form-group" id="time-select-form">
+              <label for="start-time-select">Start: </label>
+              <select class="form-control" id="start-time-select">
+                <option value="4:30 AM">4:30 AM</option>
+                <option value="5:00 AM">5:00 AM</option>
+                <option value="5:30 AM">5:30 AM</option>
+                <option value="6:00 AM">6:00 AM</option>
+                <option value="6:30 AM">6:30 AM</option>
+                <option value="7:00 AM">7:00 AM</option>
+                <option value="7:30 AM">7:30 AM</option>
+                <option value="8:00 AM">8:00 AM</option>
+                <option value="8:30 AM">8:30 AM</option>
+                <option value="9:00 AM">9:00 AM</option>
+                <option value="9:30 AM">9:30 AM</option>
+                <option value="10:00 AM">10:00 AM</option>
+                <option value="10:30 AM">10:30 AM</option>
+                <option value="11:00 AM">11:00 AM</option>
+                <option value="11:30 AM">11:30 AM</option>
+                <option value="12:00 AM">12:00 PM</option>
+                <option value="12:30 AM">12:30 PM</option>
+                <option value="1:00 PM">1:00 PM</option>
+                <option value="1:30 PM">1:30 PM</option>
+                <option value="2:00 PM">2:00 PM</option>
+                <option value="2:30 PM">2:30 PM</option>
+                <option value="3:00 PM">3:00 PM</option>
+                <option value="3:30 PM">3:30 PM</option>
+                <option value="4:00 PM">4:00 PM</option>
+                <option value="4:30 PM">4:30 PM</option>
+              </select>
+              <label for="end-time-select">End: </label>
+              <select class="form-control" id="end-time-select">
+                <option value="8:30 AM">8:30 AM</option>
+                <option value="9:00 AM">9:00 AM</option>
+                <option value="9:30 AM">9:30 AM</option>
+                <option value="10:00 AM">10:00 AM</option>
+                <option value="10:30 AM">10:30 AM</option>
+                <option value="11:00 AM">11:00 AM</option>
+                <option value="11:30 AM">11:30 AM</option>
+                <option value="12:00 PM">12:00 PM</option>
+                <option value="12:30 PM">12:30 PM</option>
+                <option value="1:00 PM">1:00 PM</option>
+                <option value="1:30 PM">1:30 PM</option>
+                <option value="2:00 PM">2:00 PM</option>
+                <option value="2:30 PM">2:30 PM</option>
+                <option value="3:00 PM">3:00 PM</option>
+                <option value="3:30 PM">3:30 PM</option>
+                <option value="4:00 PM">4:00 PM</option>
+                <option value="4:30 PM">4:30 PM</option>
+                <option value="5:00 PM">5:00 PM</option>
+                <option value="5:30 PM">5:30 PM</option>
+                <option value="6:00 PM">6:00 PM</option>
+                <option value="6:30 PM">6:30 PM</option>
+                <option value="7:00 PM">7:00 PM</option>
+                <option value="7:30 PM">7:30 PM</option>
+                <option value="8:00 PM">8:00 PM</option>
+                <option value="8:30 PM">8:30 PM</option>
+              </select>
+            </div>
+            <!-- Add Shift Button -->
+            <button type="submit" class="btn btn-primary" id="add-shift-button">Add Shift</button>
+          <!-- /New Shift Form-->  
+          </form>
+
+        <!-- /Controls -->
+        </div>
+
+      <!-- /Header Section -->  
+      </div>
+
+      <!-- Current Week Section-->
+      <div class="row">
+        <div class="col-md-12" id="current-week-section">
+          <div id="current-week-header">
+            <h2>This Week</h2>
+            <h3 id="current-week-hours">Hours: </h3>
+          </div>
+          <div class="col-md-2 day-section" id="current-mon">
+            <h4>Monday</h4>
+            <div class="time-section" id="current-mon-times">
+
+            </div>
+          </div>
+          <div class="col-md-2 day-section" id="current-tue">
+            <h4>Tuesday</h4>
+            <div class="time-section" id="current-tue-times">
+
+            </div>
+          </div>
+          <div class="col-md-2 day-section" id="current-wed">
+            <h4>Wednesday</h4>
+            <div class="time-section" id="current-wed-times">
+
+            </div>
+          </div>
+          <div class="col-md-2 day-section" id="current-thu">
+            <h4>Thursday</h4>
+            <div class="time-section" id="current-thu-times">
+
+            </div>
+          </div>
+          <div class="col-md-2 day-section" id="current-fri">
+            <h4>Friday</h4>
+            <div class="time-section" id="current-fri-times">
+
+            </div>
+          </div>
+          <div class="col-md-1 day-section" id="current-sat">
+            <h4>Saturday</h4>
+            <div class="time-section" id="current-sat-times">
+
+            </div>
+          </div>
+          <div class="col-md-1 day-section" id="current-sun">
+            <h4>Sunday</h4>
+            <div class="time-section" id="current-sun-times">
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Next Week Section-->
+      <div class="row">
+        <div class="col-md-12" id="next-week-section">
+          <div id="next-week-header">
+            <h2>Next Week</h2>
+            <h3 id="next-week-hours">Hours: </h3>
+          </div>
+          <div class="col-md-2 day-section" id="next-mon">
+            <h4>Monday</h4>
+            <div class="time-section" id="next-mon-times">
+
+            </div>
+          </div>
+          <div class="col-md-2 day-section" id="next-tue">
+            <h4>Tuesday</h4>
+            <div class="time-section" id="next-tue-times">
+
+            </div>
+          </div>
+          <div class="col-md-2 day-section" id="next-wed">
+            <h4>Wednesday</h4>
+            <div class="time-section" id="next-wed-times">
+
+            </div>
+          </div>
+          <div class="col-md-2 day-section" id="next-thu">
+            <h4>Thursday</h4>
+            <div class="time-section" id="next-thu-times">
+
+            </div>
+          </div>
+          <div class="col-md-2 day-section" id="next-fri">
+            <h4>Friday</h4>
+            <div class="time-section" id="next-fri-times">
+
+            </div>
+          </div>
+          <div class="col-md-1 day-section" id="next-sat">
+            <h4>Saturday</h4>
+            <div class="time-section" id="next-sat-times">
+
+            </div>
+          </div>
+          <div class="col-md-1 day-section" id="next-sun">
+            <h4>Sunday</h4>
+            <div class="time-section" id="next-sun-times">
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+    <!-- /Container -->
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+  </body>
+</html>
