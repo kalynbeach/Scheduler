@@ -4,6 +4,7 @@
 **	An app for keeping track of a weekly work schedule along with total hours worked
 **	
 **	TODO:
+**	- Work on gatherInputValues() function, so far it gathers week value, next is day value
 **	- Work on Add Shift button behavior, it needs to:
 **		- Create a shift object with the inputted values
 **		- Locate the proper div in the DOM based on the #week-select and #day-select values
@@ -47,10 +48,56 @@ $(document).ready(function() {
 
 }); // End of document.ready
 
+/*
+* Value gathering code
+*/
+
+function gatherInputValues() {
+
+		var options = $('input[name=options]'); // Radio button elements
+		var dayElement = $('#day-select');
+		var week,
+				day;
+
+	// Gather radio button value (week selected)
+	function gatherWeekValue() {
+		
+		for (var i = 0; i < options.length; i++) {
+			if (options[i].checked) {
+				week = options[i].value;
+				break;
+			}
+		};
+		return week;
+	};
+
+	function gatherDayValue() {
+		day = dayElement.val();
+		return day;
+	}
 
 
 
+	gatherWeekValue();
+	gatherDayValue();
+	return week;
+	return day;
+};
 
+
+/*function gatherWeekValue() {
+		var options = $('input[name=options]');
+		var week;
+
+		for (var i = 0; i < options.length; i++) {
+			if (options[i].checked) {
+				week = options[i].value;
+				break;
+			}
+		};
+		return week;
+	};
+*/
 
 
 
