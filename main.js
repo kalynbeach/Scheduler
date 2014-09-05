@@ -4,15 +4,15 @@
 **	An app for keeping track of a weekly work schedule along with total hours worked
 **	
 **	TODO:
-**	- Work on gatherInputValues() function, so far it gathers week value, next is day value
-**	- Work on Add Shift button behavior, it needs to:
-**		- Create a shift object with the inputted values
-**		- Locate the proper div in the DOM based on the #week-select and #day-select values
-**		- Display the #start-time-select and end-time-select values in the located div
+**  - Function: create new shift object from gatherInputValues() values
+**	- Add Shift button, it needs to:
+**		- Locate the proper div in the DOM based on the week and day values
+**		- Display the start time and end time values in the located div
 */
 
-// var date = new Date();
-
+// ==========================
+//	Objects and Construction
+// ==========================
 
 // Shift Constructor
 var Shift = function(week, day, start, end) {
@@ -20,49 +20,39 @@ var Shift = function(week, day, start, end) {
 	this.day = day;
 	this.start = start;
 	this.end = end;
+
+	this.returnShift = function() {
+		return this;
+	}
 };
 
-// example shift object
-var shift = {}
+// Array of shift objects
+var shifts = [];
 
-// createShift function
-function createShift() {
+//
+// ====================================
+//
 
+// ================
+//	Main Functions 
+// ================
+
+
+// Create shift object from gatherInputValues() values
+function createShift(week, day, start, end) {
+	var shift = new Shift(week, day, start, end);
+  shifts.push(shift);
 };
 
-/*
-* jQuery DOM control / interaction
-*/
-
-$(document).ready(function() {
-
-	// Add Shift button behavior
-	$('#new-task-form').submit(function() {
-
-		// Create JavaScript object from form input
-		$('#new-task-form [id]').each(function() {
-			shift[this.id] = this.value;
-		});
-
-
-		return false;
-	});
-
-}); 
-// End of document.ready
-
-/*
-* Value gathering code
-*/
-
+// Gather form input values
 function gatherInputValues() {
 
 		var options = $('input[name=options]'); // Radio button elements
 
 		var week;
 		var day;
-		var startTime;
-		var endTime;
+		var start;
+		var end;
 
 	// Gather radio button value (week selected)
 	function gatherWeekValue() {
@@ -87,64 +77,81 @@ function gatherInputValues() {
 	// Gather start time value from form input
 	function gatherStartValue() {
 		$('#start-time option:selected').each(function() {
-			startTime = $(this).val();
+			start = $(this).val();
 			return false;
 		});
-		return startTime;
+		return start;
 	};
 
 	// Gather end time value from form input
 	function gatherEndValue() {
 		$('#end-time option:selected').each(function() {
-			endTime = $(this).val();
+			end = $(this).val();
 			return false;
 		});
-		return endTime;
+		return end;
 	};
 
-
-
+	// Call gather functions
 	gatherWeekValue();
 	gatherDayValue();
 	gatherStartValue();
 	gatherEndValue();
+
+	// Call createShift function on newly returned values
+	createShift(week, day, start, end);
+
 	console.log("Week of shift: " + week);
 	console.log("Day of shift: " + day);
-	console.log("Start time: " + startTime);
-	console.log("End time: " + endTime);
+	console.log("Start time: " + start);
+	console.log("End time: " + end);
 };
 
-/*========================================
-**========================================
-*/
+// Console.log() a shift object's values
+function logShift(week, day) {
+
+};
+
+// Find proper html element to display values in
+function displayShift(shift) {
+
+};
+
+//
+// ====================================
+//
 
 
+// ==================================
+//	jQuery DOM control / interaction 
+// ==================================
 
-/*
-*		Testing
-*/
+$(document).ready(function() {
 
-/*function gatherWeekValue() {
-		var options = $('input[name=options]');
-		var week;
+	// Add Shift button behavior
+	$('#new-task-form').submit(function() {
 
-		for (var i = 0; i < options.length; i++) {
-			if (options[i].checked) {
-				week = options[i].value;
-				break;
-			}
-		};
-		return week;
-	};
-*/
+		gatherInputValues();
 
-function gatherDayValue() {
-	$('#day-select option:selected').each(function() {
-		day = $(this).val();
 		return false;
 	});
-	return day;
-};
+
+}); 
+// End of document.ready
+
+//
+// ====================================
+//
+
+// =========
+//	Testing
+// =========
+
+
+
+//
+// ====================================
+//
 
 
 
