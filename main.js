@@ -4,7 +4,7 @@
 **	An app for keeping track of a weekly work schedule along with total hours worked
 **	
 **	TODO:
-**  - Function: create new shift object from gatherInputValues() values
+**  - 
 **	- Add Shift button, it needs to:
 **		- Locate the proper div in the DOM based on the week and day values
 **		- Display the start time and end time values in the located div
@@ -108,8 +108,11 @@ function gatherInputValues() {
 };
 
 // Console.log() a shift object's values
-function logShift(week, day) {
-
+function logShift(shift) {
+	console.log("Week of shift: " + shift.week);
+	console.log("Day of shift: " + shift.day);
+	console.log("Start time: " + shift.start);
+	console.log("End time: " + shift.end);
 };
 
 // Find proper html element to display values in
