@@ -1,21 +1,63 @@
 .container {
-	margin-left: 10%;
-	margin-right: 10%;
+	margin-left: auto;
+	margin-right: auto;
+	width: 80%;
 }
 
-.day-section {
-	border: 1px solid black;
+.header {
 	height: 100px;
 }
 
+.title {
+	height: 100%;
+}
+
+.title h1 {
+	font-weight: bold;
+	display: block;
+	vertical-align: middle;
+}
+
+.controls {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	height: 100%;
+}
+
+.control-buttons {
+	margin-right: 5px;
+}
+
+.week-section {
+	width: 100%;
+}
+
+.day-section {
+	border: 2px solid black;
+	height: 100px;
+	width: 14.2%;
+}
+
 .day-section h4{
+	display: inline-block;
+	text-align: left;
+}
+
+.delete-button {
+	display: inline-block;
+	float: right;
+	margin-top: 8px;
 	text-align: center;
 }
 
 .times-section {
-	font-size: 18px;
+	font-size: 16px;
+	font-weight: bold;
+	text-align: center;
 }
 
 #new-shift-form {
 	display: none;
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
