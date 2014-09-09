@@ -13,9 +13,10 @@
 }
 
 .title h1 {
-	font-weight: bold;
 	display: block;
 	vertical-align: middle;
+	font-weight: bold;
+	font-size: 55px;
 }
 
 .controls {
