@@ -5,8 +5,17 @@
 
 .day-section {
 	border: 1px solid black;
+	height: 100px;
 }
 
-.time-section {
-	
+.day-section h4{
+	text-align: center;
+}
+
+.times-section {
+	font-size: 18px;
+}
+
+#new-shift-form {
+	display: none;
 }

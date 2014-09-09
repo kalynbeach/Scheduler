@@ -225,15 +225,27 @@ function displayShift(shift) {
 
 $(document).ready(function() {
 
-	// Add Shift button behavior
-	$('#new-task-form').submit(function(e) {
+	// Add Shift button 
+	$('#new-shift-form').submit(function(e) {
 
 		gatherInputValues();
 
+		// Toggle form back up after submit
+		$(this).slideToggle();
+
+		// Prevent default submitting action on load
 		e.preventDefault();
 
 		//return false;
 	});
+
+	// New Shift button
+	$('#new-shift-button').click(function() {
+
+		// Toggle new shift form down
+		$('#new-shift-form').slideToggle();
+	});
+
 
 }); 
 // End of document.ready
