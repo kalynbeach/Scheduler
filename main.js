@@ -4,10 +4,10 @@
 **	An app for keeping track of a weekly work schedule
 **	
 **	TODO:
-**  - Need to make Add Shift button call all needed functions for the newly added shift object
-**	- Add Shift button, it needs to:
-**		- DONE: Locate the proper div in the DOM based on the week and day values
-**		- DONE: Display the start time and end time values in the located div
+**  - Delete shift button
+**	- Exporting / saving to text file
+**		
+**
 */
 
 // ==========================
@@ -24,6 +24,8 @@ var Shift = function(week, day, start, end) {
 	this.start = start;
 	this.end = end;
 
+	this.shiftName = '';
+
 	// Return the shift
 	this.returnShift = function() {
 		return this;
@@ -35,7 +37,7 @@ var Shift = function(week, day, start, end) {
 	};
 
 	// Remove the shift from the shifts array
-	this.deleteShift = function() {
+	this.removeShift = function() {
 		shifts.splice(this, 1);
 	};
 
@@ -55,28 +57,42 @@ var Shift = function(week, day, start, end) {
 //	Main Functions 
 // ================
 
-
+//
 // Create shift object from gatherInputValues() values 
-// == function needs to be cleaned up and separated ==
+// TODO: cleaned up and separate concerns
+//
 function createShiftObject(week, day, start, end) {
+
+	// Create new Shift object
 	var shift = new Shift(week, day, start, end);
+
+	// Append shift to shifts array
   shifts.push(shift);
+
+  // Assign the shift's shiftName property equal to its index in the shifts array
+  shift.shiftName = shifts.indexOf(shift);
 
   // Display shift by adding it to the DOM
   displayShift(shift);
 };
 
-// Gather form input values
+function deleteShift(shiftName) {
+	shift[shiftName].removeShift();
+};
+
+// 
+//	Gather form input values
+//
 function gatherInputValues() {
 
-		// Radio button elements
-		var options = $('input[name=options]'); 
+	// Radio button elements
+	var options = $('input[name=options]'); 
 
-		// Value variables
-		var week;
-		var day;
-		var start;
-		var end;
+	// Value variables
+	var week;
+	var day;
+	var start;
+	var end;
 
 	// Gather radio button value (week selected)
 	function gatherWeekValue() {
@@ -127,15 +143,20 @@ function gatherInputValues() {
 
 };
 
+//
 // Console.log() a shift object's values
+//
 function logShift(shift) {
+	console.log("Shift name (index): " + shift.shiftName);
 	console.log("Week of shift: " + shift.week);
 	console.log("Day of shift: " + shift.day);
 	console.log("Start time: " + shift.start);
 	console.log("End time: " + shift.end);
 };
 
+//
 // Find proper div to display values in, then insert values into the div
+//
 function displayShift(shift) {
 
 	// Assign shift values to vars
@@ -143,10 +164,13 @@ function displayShift(shift) {
 	var day   = shift.day;
 	var start = shift.start;
 	var end   = shift.end;
-
+	
 	// Div locations
 	var weekDiv;
 	var timesDiv;
+
+	// Unique name for the shift
+	var shiftName = shift.shiftName;
 
 	// Select proper week div
 	switch (week) {
@@ -211,7 +235,10 @@ function displayShift(shift) {
 
 	// Insert time strings to the proper div
 	$(timesDiv).text(start + " - " + end);
-	
+
+	// Create data-shiftName attribute on the element that links the text to its shift object
+	$(timesDiv).data('shiftname', shiftName);
+	console.log("From Add Shift: " + shiftName);
 };
 
 //
@@ -225,7 +252,9 @@ function displayShift(shift) {
 
 $(document).ready(function() {
 
+	//
 	// Add Shift button 
+	//
 	$('#new-shift-form').submit(function(e) {
 
 		gatherInputValues();
@@ -239,13 +268,34 @@ $(document).ready(function() {
 		//return false;
 	});
 
+	//
 	// New Shift button
+	//
 	$('#new-shift-button').click(function() {
 
 		// Toggle new shift form down
 		$('#new-shift-form').slideToggle();
 	});
 
+	//
+	//	Delete Shift button
+	//
+	$(".delete-button").click(function() {
+
+		// Delete shift object from shifts array
+		var divShiftName = $(this).siblings('.times-section').data('shiftname');
+		
+		// Log for debugging
+		console.log("From Delete Shift: " + divShiftName);
+
+		// Splice shift object from shifts array
+		shifts.splice(divShiftName, 1);
+		
+		// Remove time text from div
+		$(this).siblings('.times-section').text('');
+
+
+	});
 
 }); 
 // End of document.ready
