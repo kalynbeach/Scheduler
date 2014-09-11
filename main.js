@@ -4,9 +4,8 @@
 **	An app for keeping track of a weekly work schedule
 **	
 **	TODO:
-**  - Delete shift button
-**	- Exporting / saving to text file
-**		
+**	- Saving to DB
+**	- Exporting as text file
 **
 */
 

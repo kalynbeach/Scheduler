@@ -1,0 +1,10 @@
+{
+  "name": "Scheduler",
+  "description": "Scheduler app",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "4.x",
+    "mongoose": "3.x"
+  }
+}
