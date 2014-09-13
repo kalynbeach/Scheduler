@@ -9,44 +9,39 @@
 **
 */
 
-// ==========================
-//	Objects and Construction
-// ==========================
+// ===================================
+//	Constructor and prototype methods
+// ===================================
+
+"use strict";
 
 // Array of shift objects
 var shifts = [];
 
 // Shift object Constructor
 var Shift = function(week, day, start, end) {
-	this.week = week;
-	this.day = day;
-	this.start = start;
-	this.end = end;
+	this.week 	= week;
+	this.day 		= day;
+	this.start 	= start;
+	this.end 		= end;
 
-	this.shiftName = '';
-
-	// Return the shift
-	this.returnShift = function() {
-		return this;
-	};
-
-	// Call displayShift function on the shift
-	this.addToSchedule = function() {
-		displayShift(this);
-	};
-
-	// Remove the shift from the shifts array
-	this.removeShift = function() {
-		shifts.splice(this, 1);
-	};
-
-	this.logShift = function() {
-		console.log("Week of shift: " + this.week);
-		console.log("Day of shift: " + this.day);
-		console.log("Start time: " + this.start);
-		console.log("End time: " + this.end);
-	}
+	// Shift object's index within the shifts array
+	this.shiftIndex = '';
 };
+
+// Splice the shift from the shifts array
+Shift.prototype.removeShift = function() {
+	shifts.splice(this, 1);
+};
+
+// Log the shift's property values to the console
+Shift.prototype.logShift = function() {
+	console.log("Week of shift: " + this.week);
+	console.log("Day of shift: " + this.day);
+	console.log("Start time: " + this.start);
+	console.log("End time: " + this.end);
+};
+
 
 //
 // ====================================
@@ -68,15 +63,15 @@ function createShiftObject(week, day, start, end) {
 	// Append shift to shifts array
   shifts.push(shift);
 
-  // Assign the shift's shiftName property equal to its index in the shifts array
-  shift.shiftName = shifts.indexOf(shift);
+  // Assign the shift's shiftIndex property equal to its index in the shifts array
+  shift.shiftIndex = shifts.indexOf(shift);
 
   // Display shift by adding it to the DOM
   displayShift(shift);
 };
 
-function deleteShift(shiftName) {
-	shift[shiftName].removeShift();
+function deleteShift(shiftIndex) {
+	shift[shiftIndex].removeShift();
 };
 
 // 
@@ -88,10 +83,10 @@ function gatherInputValues() {
 	var options = $('input[name=options]'); 
 
 	// Value variables
-	var week;
-	var day;
-	var start;
-	var end;
+	var week,
+			day,
+			start,
+			end;
 
 	// Gather radio button value (week selected)
 	function gatherWeekValue() {
@@ -143,17 +138,6 @@ function gatherInputValues() {
 };
 
 //
-// Console.log() a shift object's values
-//
-function logShift(shift) {
-	console.log("Shift name (index): " + shift.shiftName);
-	console.log("Week of shift: " + shift.week);
-	console.log("Day of shift: " + shift.day);
-	console.log("Start time: " + shift.start);
-	console.log("End time: " + shift.end);
-};
-
-//
 // Find proper div to display values in, then insert values into the div
 //
 function displayShift(shift) {
@@ -169,7 +153,7 @@ function displayShift(shift) {
 	var timesDiv;
 
 	// Unique name for the shift
-	var shiftName = shift.shiftName;
+	var shiftIndex = shift.shiftIndex;
 
 	// Select proper week div
 	switch (week) {
@@ -227,7 +211,7 @@ function displayShift(shift) {
 				timesDiv = "#next-sat-times";
 				break;
 			case "Sunday":
-				timesDiv = "next-sun-times";
+				timesDiv = "#next-sun-times";
 				break;
 		}
 	}
@@ -235,9 +219,9 @@ function displayShift(shift) {
 	// Insert time strings to the proper div
 	$(timesDiv).text(start + " - " + end);
 
-	// Create data-shiftName attribute on the element that links the text to its shift object
-	$(timesDiv).data('shiftname', shiftName);
-	console.log("From Add Shift: " + shiftName);
+	// Create data-shiftIndex attribute on the element that links the text to its shift object
+	$(timesDiv).data('shiftindex', shiftIndex);
+	console.log("From Add Shift: " + shiftIndex);
 };
 
 //
@@ -282,13 +266,13 @@ $(document).ready(function() {
 	$(".delete-button").click(function() {
 
 		// Delete shift object from shifts array
-		var divShiftName = $(this).siblings('.times-section').data('shiftname');
+		var divShiftIndex = $(this).siblings('.times-section').data('shiftindex');
 		
 		// Log for debugging
-		console.log("From Delete Shift: " + divShiftName);
+		console.log("From Delete Shift: " + divShiftIndex);
 
 		// Splice shift object from shifts array
-		shifts.splice(divShiftName, 1);
+		shifts.splice(divShiftIndex, 1);
 		
 		// Remove time text from div
 		$(this).siblings('.times-section').text('');
