@@ -1,0 +1,16 @@
+{
+  "name": "Scheduler",
+  "version": "0.0.0",
+  "authors": [
+    "kalynbeach <kalynbeach@gmail.com>"
+  ],
+  "description": "Organize and easily view a work schedule",
+  "main": "index.html",
+  "dependencies": {
+    "bootstrap": "latest",
+    "less.js": "latest",
+    "express": "latest"
+  },
+  "license": "MIT",
+  "homepage": "kalynbeach.com"
+}
