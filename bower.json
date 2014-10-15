@@ -9,7 +9,9 @@
   "dependencies": {
     "bootstrap": "latest",
     "less.js": "latest",
-    "express": "latest"
+    "express": "latest",
+    "backbone": "latest",
+    "backbone.localStorage": "latest"
   },
   "license": "MIT",
   "homepage": "kalynbeach.com"
