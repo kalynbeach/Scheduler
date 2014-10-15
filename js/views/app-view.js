@@ -53,6 +53,10 @@ var app = app || {};
 		createShift: function(e) {
 			app.schedule.create(this.inputValues());
 			e.preventDefault();
+		},
+
+		toggleNewShiftForm: function() {
+			this.$form.slideToggle();
 		}
 
 
