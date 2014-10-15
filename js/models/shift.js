@@ -13,6 +13,7 @@ var app = app || {};
 
 	  initialize: function() {
 	  	console.log('This model has been initialized.');
+	  	this.logShift();
 	  },
 
 	  defaults: {
@@ -20,13 +21,16 @@ var app = app || {};
 	  	day: '',
 	  	start: '',
 	  	end: ''
+	  },
+
+	  logShift: function() {
+	  	console.log('Week: ' + this.attributes.week);
+	  	console.log('Day: ' + this.attributes.day);
+	  	console.log('Start Time: ' + this.attributes.start);
+	  	console.log('End Time: ' + this.attributes.end);
 	  }
 
 	});
-
-	var shift1 = new app.Shift();
-
-	console.log(JSON.stringify(shift1));
 
 })();
 

@@ -29,7 +29,6 @@
         <!-- Controls -->
         <div class="col-md-8 controls">
           <button class="btn btn-default control-buttons" id="new-shift-button">New Shift</button>
-          <button class="btn btn-default control-buttons" id="edit-shift-button">Edit Shift</button>
 
           <!-- New Shift Form -->
           <form class="form-inline" role="form" id="new-shift-form">
@@ -185,50 +184,43 @@
           </div>
           <div class="col-md-1 day-section" id="this-monday">
             <h4>Monday</h4>
-            <button type="button" class="btn btn-default btn-xs delete-button"> x </button>
-            <div class="times-section" id="this-mon-times">
+            <div class="display-section" id="this-mon-times">
 
             </div>
           </div>
           <div class="col-md-1 day-section" id="this-tuesday">
             <h4>Tuesday</h4>
-            <button type="button" class="btn btn-default btn-xs delete-button"> x </button>
-            <div class="times-section" id="this-tue-times">
+            <div class="display-section" id="this-tue-times">
 
             </div>
           </div>
           <div class="col-md-1 day-section" id="this-wednesday">
             <h4>Wednesday</h4>
-            <button type="button" class="btn btn-default btn-xs delete-button"> x </button>
-            <div class="times-section" id="this-wed-times">
+            <div class="display-section" id="this-wed-times">
 
             </div>
           </div>
           <div class="col-md-1 day-section" id="this-thursday">
             <h4>Thursday</h4>
-            <button type="button" class="btn btn-default btn-xs delete-button"> x </button>
-            <div class="times-section" id="this-thu-times">
+            <div class="display-section" id="this-thu-times">
 
             </div>
           </div>
           <div class="col-md-1 day-section" id="this-friday">
             <h4>Friday</h4>
-            <button type="button" class="btn btn-default btn-xs delete-button"> x </button>
-            <div class="times-section" id="this-fri-times">
+            <div class="display-section" id="this-fri-times">
 
             </div>
           </div>
           <div class="col-md-1 day-section" id="this-saturday">
             <h4>Saturday</h4>
-            <button type="button" class="btn btn-default btn-xs delete-button"> x </button>
-            <div class="times-section" id="this-sat-times">
+            <div class="display-section" id="this-sat-times">
 
             </div>
           </div>
           <div class="col-md-1 day-section" id="this-sunday">
             <h4>Sunday</h4>
-            <button type="button" class="btn btn-default btn-xs delete-button"> x </button>
-            <div class="times-section" id="this-sun-times">
+            <div class="display-section" id="this-sun-times">
 
             </div>
           </div>
@@ -244,50 +236,43 @@
           </div>
           <div class="col-md-1 day-section" id="next-monday">
             <h4>Monday</h4>
-            <button type="button" class="btn btn-default btn-xs delete-button"> x </button>
-            <div class="times-section" id="next-mon-times">
+            <div class="display-section" id="next-mon-times">
 
             </div>
           </div>
           <div class="col-md-1 day-section" id="next-tuesday">
             <h4>Tuesday</h4>
-            <button type="button" class="btn btn-default btn-xs delete-button"> x </button>
-            <div class="times-section" id="next-tue-times">
+            <div class="display-section" id="next-tue-times">
 
             </div>
           </div>
           <div class="col-md-1 day-section" id="next-wednesday">
             <h4>Wednesday</h4>
-            <button type="button" class="btn btn-default btn-xs delete-button"> x </button>
-            <div class="times-section" id="next-wed-times">
+            <div class="display-section" id="next-wed-times">
 
             </div>
           </div>
           <div class="col-md-1 day-section" id="next-thursday">
             <h4>Thursday</h4>
-            <button type="button" class="btn btn-default btn-xs delete-button"> x </button>
-            <div class="times-section" id="next-thu-times">
+            <div class="display-section" id="next-thu-times">
 
             </div>
           </div>
           <div class="col-md-1 day-section" id="next-friday">
             <h4>Friday</h4>
-            <button type="button" class="btn btn-default btn-xs delete-button"> x </button>
-            <div class="times-section" id="next-fri-times">
+            <div class="display-section" id="next-fri-times">
 
             </div>
           </div>
           <div class="col-md-1 day-section" id="next-saturday">
             <h4>Saturday</h4>
-            <button type="button" class="btn btn-default btn-xs delete-button"> x </button>
-            <div class="times-section" id="next-sat-times">
+            <div class="display-section" id="next-sat-times">
 
             </div>
           </div>
           <div class="col-md-1 day-section" id="next-sunday">
             <h4>Sunday</h4>
-            <button type="button" class="btn btn-default btn-xs delete-button"> x </button>
-            <div class="times-section" id="next-sun-times">
+            <div class="display-section" id="next-sun-times">
 
             </div>
           </div>
@@ -298,6 +283,14 @@
 
     <!-- /Container -->
     </div>
+
+    <!-- Templates -->
+    <script type="text/template" id="shift-template">
+      <div>
+        <button type="button" class="btn btn-default btn-xs delete-button"> x </button>
+        <%- start %> - <%- end %>
+      </div>
+    </script>
 
     <!-- Libs -->
     <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
@@ -310,11 +303,12 @@
     <!-- Scripts -->
     <!-- <script type="text/javascript" src="js/main.js"></script> -->
     
-
     <script type="text/javascript" src="js/app.js"></script>
     <script type="text/javascript" src="js/models/shift.js"></script>
     <script type="text/javascript" src="js/collections/schedule.js"></script>
     <script type="text/javascript" src="js/views/app-view.js"></script>
+    <script type="text/javascript" src="js/views/shift-view.js"></script>
+
 
   </body>
 </html>
