@@ -13,6 +13,8 @@ var app = app || {};
 
 	  model: app.Shift,
 
+	  url: '/api/shifts',
+
 	  localStorage: new Backbone.LocalStorage('scheduler')
 
 
