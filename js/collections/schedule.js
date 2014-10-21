@@ -9,18 +9,13 @@ var app = app || {};
 (function() {
 	'use-strict';
 
-	var Schedule = Backbone.Collection.extend({
+	app.Schedule = Backbone.Collection.extend({
 
 	  model: app.Shift,
 
-	  url: '/api/shifts',
-
-	  localStorage: new Backbone.LocalStorage('scheduler')
-
+	  url: '/api/shifts'
 
 	});
-
-	app.schedule = new Schedule();
 
 })();
 

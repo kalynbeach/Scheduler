@@ -11,19 +11,48 @@
 var express	= require('express'),
 		mongoose	= require('mongoose'),
 		path = require( 'path' ),
+		bodyParser = require('body-parser'),
 		application_root = __dirname;
 
 // Create Server
 var app = express();
 
-// Where to serve static content
+// Configure
 app.use(express.static(path.join(application_root)));
 app.use(express.static(__dirname + '/less'));
+
+app.use(bodyParser());
+
+// Run the server on port 8080
+app.listen(8080, function() {
+	console.log('Listening on port %d in %s mode', 8080, app.settings.env);
+});
+
+// Connect to database
+mongoose.connect('mongodb://kalynbeach:Kkbeach93@proximus.modulusmongo.net:27017/ynyBab6y');
+
+/*
+**  Schemas
+*/
+
+var Shift = new mongoose.Schema({
+	week: String,
+	day: String,
+	start: String,
+	end: String
+});
+
+/*
+**	Models
+*/
+
+var ShiftModel = mongoose.model('Shift', Shift);
 
 /*
 **  Routes
 */
 
+// Root API route
 app.get( '/api', function(req, res) {
   res.send('API is running');
 });
@@ -48,7 +77,7 @@ app.post('/api/shifts', function(req, res) {
 		end: req.body.end
 	});
 
-	return shift.save(function(err) {
+	shift.save(function(err) {
 		if (!err) {
 			console.log('Created.');
 			return res.send(shift);
@@ -56,6 +85,8 @@ app.post('/api/shifts', function(req, res) {
 			return console.log(err);
 		}
 	});
+
+	console.log(req.body);
 });
 
 // Get a single shift by id
@@ -101,33 +132,4 @@ app.delete('/api/shifts/:id', function(req, res) {
 			}
 		});
 	});
-});
-
-// Connect to database
-mongoose.connect('mongodb://kalynbeach:Kkbeach93@proximus.modulusmongo.net:27017/ynyBab6y');
-
-/*
-**  Schemas
-*/
-
-var Shift = new mongoose.Schema({
-	week: String,
-	day: String,
-	start: String,
-	end: String
-});
-
-var Schedule = new mongoose.Schema({
-
-});
-
-/*
-**	Models
-*/
-
-var ShiftModel = mongoose.model('Shift', Shift)
-
-// Run the server on port 8080
-app.listen(8080, function() {
-	console.log('Listening on port %d in %s mode', 8080, app.settings.env);
 });

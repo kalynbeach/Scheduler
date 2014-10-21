@@ -28,9 +28,34 @@ var app = app || {};
 			this.$end = this.$('#end-time');
 			this.$daySection = this.$('.day-section');
 
-			this.listenTo(app.schedule, 'add', this.addShift);
+			this.collection = new app.Schedule();
+			this.collection.fetch({reset: true}); // Fetch existing models from the server
+			this.render();
 
-			//app.schedule.fetch({reset: true});
+			this.listenTo(this.collection, 'add', this.addShift);
+			this.listenTo(this.collection, 'reset', this.render); // Re-render when API interaction occurs
+		},
+
+		render: function() {
+      this.collection.each(function(shift) {
+      	this.addShift(shift);
+      }, this);
+		},
+
+		// Create new shift model in the schedule collection from form input values
+		createShift: function(e) {
+      e.preventDefault();
+
+      // Gather input values and assign the object of values to a var
+			var inputData = this.inputValues();
+
+			var newShift = new app.Shift(inputData);
+			this.collection.add(newShift);
+
+			newShift.save();
+
+      console.log(inputData);
+			this.logCollection();
 		},
 
 		// Gather input values from #new-shift-form
@@ -49,17 +74,15 @@ var app = app || {};
       view.render().el;
 		},
 
-		// Create new shift model in the schedule collection from form input values
-		createShift: function(e) {
-			app.schedule.create(this.inputValues());
-			e.preventDefault();
+		// Console.log the AppView's collection
+		logCollection: function() {
+			console.log(this.collection);
 		},
 
+		// jQuery .slideToggle() on the input form
 		toggleNewShiftForm: function() {
 			this.$form.slideToggle();
 		}
-
-
 
 	});
 

@@ -28,9 +28,9 @@ var app = app || {};
 
 		render: function() {
 			// Prevent double render from localStorage
-			if (this.model.changed.id !== undefined) {
+			/*if (this.model.changed.id !== undefined) {
 				return;
-			}
+			}*/
 
 			this.$el.children('.display-section').html(this.template(this.model.toJSON()));
 			return this;

@@ -17,10 +17,15 @@ var app = app || {};
 	  },
 
 	  defaults: {
-	  	week: '',
-	  	day: '',
-	  	start: '',
-	  	end: ''
+	  	"week": '',
+	  	"day": '',
+	  	"start": '',
+	  	"end": ''
+	  },
+
+	  parse: function(res) {
+      res.id = res._id;
+      return res;
 	  },
 
 	  logShift: function() {
